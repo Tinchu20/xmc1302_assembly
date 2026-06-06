@@ -1,0 +1,6 @@
+TARGET      = ig01
+TARGET_ELF  = $(DIR_BIN)/$(TARGET).elf
+TARGET_HEX  = $(DIR_BIN)/$(TARGET).hex
+TARGET_LST  = $(DIR_BIN)/$(TARGET).lst
+TARGET_SIZE = $(DIR_BIN)/$(TARGET).siz
+TARGET_MAP  = $(DIR_BIN)/$(TARGET).map

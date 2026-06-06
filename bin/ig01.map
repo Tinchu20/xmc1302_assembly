@@ -1,0 +1,523 @@
+
+There are no discarded input sections
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+FLASH            0x10001000         0x00032000         xr
+SRAM             0x20000000         0x00004000         !xr
+*default*        0x00000000         0xffffffff
+
+Linker script and memory map
+
+                0x00000400                        stack_size = DEFINED (stack_size)?stack_size:0x400
+                0x00000004                        no_init_size = 0x4
+
+.text           0x10001000      0x454
+                0x10001000                        sText = .
+ *(.reset)
+ .reset         0x10001000       0x92 /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/_startup/startup_xmc1300.o
+                0x10001000                __Vectors
+                0x10001018                Reset_Handler
+                0x10001090                VADC0_C0_0_IRQHandler
+                0x10001090                USIC0_5_IRQHandler
+                0x10001090                POSIF0_0_IRQHandler
+                0x10001090                HardFault_Handler
+                0x10001090                VADC0_G1_1_IRQHandler
+                0x10001090                SysTick_Handler
+                0x10001090                PendSV_Handler
+                0x10001090                CCU40_2_IRQHandler
+                0x10001090                SCU_0_IRQHandler
+                0x10001090                ERU0_0_IRQHandler
+                0x10001090                CCU80_1_IRQHandler
+                0x10001090                USIC0_0_IRQHandler
+                0x10001090                ERU0_2_IRQHandler
+                0x10001090                BCCU0_0_IRQHandler
+                0x10001090                ERU0_3_IRQHandler
+                0x10001090                VADC0_G0_1_IRQHandler
+                0x10001090                CCU40_0_IRQHandler
+                0x10001090                POSIF0_1_IRQHandler
+                0x10001090                VADC0_G0_0_IRQHandler
+                0x10001090                MATH0_0_IRQHandler
+                0x10001090                VADC0_C0_1_IRQHandler
+                0x10001090                SVC_Handler
+                0x10001090                USIC0_3_IRQHandler
+                0x10001090                VADC0_G1_0_IRQHandler
+                0x10001090                CCU80_0_IRQHandler
+                0x10001090                CCU40_1_IRQHandler
+                0x10001090                SCU_2_IRQHandler
+                0x10001090                USIC0_1_IRQHandler
+                0x10001090                CCU40_3_IRQHandler
+                0x10001090                USIC0_4_IRQHandler
+                0x10001090                SCU_1_IRQHandler
+                0x10001090                ERU0_1_IRQHandler
+                0x10001090                USIC0_2_IRQHandler
+                0x10001090                Default_handler
+ *(.text .text.* .gnu.linkonce.t.*)
+ .text          0x10001092        0x0 /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/driver/wdt.o
+ *fill*         0x10001092        0x2 
+ .text          0x10001094       0x1c /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/driver/scu_gen.o
+                0x10001094                scu_gen_bit_prot_disable
+                0x1000109c                scu_gen_bit_prot_enable
+ .text          0x100010b0        0x0 /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/driver/rtc.o
+ .text          0x100010b0       0x68 /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/driver/scu_clk.o
+                0x100010b0                sys_core_clk_setup
+ .text          0x10001118        0x0 /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/driver/scu_reset.o
+ .text          0x10001118       0x6c /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/driver/gpio.o
+                0x10001118                gpio_init
+                0x1000112e                led_blinking
+ .text          0x10001184        0x0 /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/driver/scu_analog.o
+ .text          0x10001184        0x0 /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/driver/scu_pwr.o
+ .text          0x10001184        0x0 /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/driver/posif.o
+ .text          0x10001184        0x0 /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/driver/scu_int.o
+ .text          0x10001184        0x0 /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/driver/math.o
+ .text          0x10001184        0x0 /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/driver/pau.o
+ .text          0x10001184       0x84 /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/driver/div.o
+                0x10001184                sdiv
+                0x10001186                udiv
+ .text          0x10001208       0x28 /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/driver/nvm.o
+                0x10001208                sys_core_setup
+ .text          0x10001230        0x0 /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/driver/comparator.o
+ .text          0x10001230        0x0 /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/driver/flash.o
+ .text          0x10001230        0x0 /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/driver/prng.o
+ .text          0x10001230       0x54 /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/app/main.o
+                0x10001230                main
+ .text          0x10001284        0x2 /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/app/app_gpio.o
+                0x10001284                led
+ .text          0x10001286        0xc /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/app/system.o
+                0x10001286                SystemInit
+ .text          0x10001292        0x0 /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/_startup/startup_xmc1300.o
+ *(.init)
+ *(.fini)
+ *crtbegin.o(.ctors)
+ *crtbegin?.o(.ctors)
+ *(EXCLUDE_FILE(*crtend.o *crtend?.o) .ctors)
+ *(SORT_BY_NAME(.ctors.*))
+ *(.ctors)
+ *crtbegin.o(.dtors)
+ *crtbegin?.o(.dtors)
+ *(EXCLUDE_FILE(*crtend.o *crtend?.o) .dtors)
+ *(SORT_BY_NAME(.dtors.*))
+ *(.dtors)
+ *(.rodata .rodata.*)
+ *fill*         0x10001292        0x2 
+ .rodata        0x10001294      0x1c0 /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/driver/gpio.o
+ *(.gnu.linkonce.r*)
+ *(vtable)
+                0x10001454                        . = ALIGN (0x4)
+
+.glue_7         0x10001454        0x0
+ .glue_7        0x10001454        0x0 linker stubs
+
+.glue_7t        0x10001454        0x0
+ .glue_7t       0x10001454        0x0 linker stubs
+
+.vfp11_veneer   0x10001454        0x0
+ .vfp11_veneer  0x10001454        0x0 linker stubs
+
+.v4_bx          0x10001454        0x0
+ .v4_bx         0x10001454        0x0 linker stubs
+
+.iplt           0x10001454        0x0
+ .iplt          0x10001454        0x0 /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/driver/scu_clk.o
+
+.eh_frame_hdr
+ *(.eh_frame_hdr)
+
+.eh_frame
+ *(.eh_frame)
+
+.ARM.extab
+ *(.ARM.extab* .gnu.linkonce.armextab.*)
+                0x10001454                        . = ALIGN (0x4)
+                0x10001454                        __exidx_start = .
+
+.ARM.exidx
+ *(.ARM.exidx* .gnu.linkonce.armexidx.*)
+                0x10001454                        __exidx_end = .
+                0x10001454                        . = ALIGN (0x4)
+
+.VENEER_Code    0x2000000c      0x138 load address 0x10001454
+                0x2000000c                        . = ALIGN (0x4)
+                0x2000000c                        VeneerStart = .
+ *(.XmcVeneerCode)
+ .XmcVeneerCode
+                0x2000000c      0x138 /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/_startup/startup_xmc1300.o
+                0x2000000c                HardFault_Veneer
+                0x2000002c                SVC_Veneer
+                0x20000038                PendSV_Veneer
+                0x2000003c                SysTick_Veneer
+                0x20000040                SCU_0_Veneer
+                0x20000044                SCU_1_Veneer
+                0x20000048                SCU_2_Veneer
+                0x2000004c                SCU_3_Veneer
+                0x20000050                SCU_4_Veneer
+                0x20000054                SCU_5_Veneer
+                0x20000058                SCU_6_Veneer
+                0x2000005c                MATH_Veneer
+                0x20000064                USIC0_0_Veneer
+                0x20000068                USIC0_1_Veneer
+                0x2000006c                USIC0_2_Veneer
+                0x20000070                USIC0_3_Veneer
+                0x20000074                USIC0_4_Veneer
+                0x20000078                USIC0_5_Veneer
+                0x2000007c                VADC0_C0_0_Veneer
+                0x20000080                VADC0_C0_1_Veneer
+                0x20000084                VADC0_G0_0_Veneer
+                0x20000088                VADC0_G0_1_Veneer
+                0x2000008c                VADC0_G1_0_Veneer
+                0x20000090                VADC0_G1_1_Veneer
+                0x20000094                CCU40_0_Veneer
+                0x20000098                CCU40_1_Veneer
+                0x2000009c                CCU40_2_Veneer
+                0x200000a0                CCU40_3_Veneer
+                0x200000a4                CCU80_0_Veneer
+                0x200000a8                CCU80_1_Veneer
+                0x200000ac                POSIF0_0_Veneer
+                0x200000b0                POSIF0_1_Veneer
+                0x200000bc                BCCU0_0_Veneer
+                0x20000144                        . = ALIGN (0x4)
+                0x20000144                        VeneerEnd = .
+                0x10001454                        eROData = LOADADDR (.VENEER_Code)
+                0x00000138                        VeneerSize = (ABSOLUTE (VeneerEnd) - ABSOLUTE (VeneerStart))
+
+.rel.dyn        0x20000144        0x0 load address 0x1000158c
+ .rel.iplt      0x20000144        0x0 /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/driver/scu_clk.o
+
+Stack           0x20000144      0x404 load address 0x00000000
+                0x20000148                        . = ALIGN (0x8)
+ *fill*         0x20000144        0x4 
+                0x20000548                        . = (. + stack_size)
+ *fill*         0x20000148      0x400 
+                0x20000548                        __initial_sp = .
+
+.data           0x20000548        0x4 load address 0x1000158c
+                0x20000548                        . = ALIGN (0x4)
+                0x20000548                        __data_start = .
+ *(.data)
+ .data          0x20000548        0x0 /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/driver/wdt.o
+ .data          0x20000548        0x0 /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/driver/scu_gen.o
+ .data          0x20000548        0x0 /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/driver/rtc.o
+ .data          0x20000548        0x4 /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/driver/scu_clk.o
+                0x20000548                SystemCoreClock
+ .data          0x2000054c        0x0 /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/driver/scu_reset.o
+ .data          0x2000054c        0x0 /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/driver/gpio.o
+ .data          0x2000054c        0x0 /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/driver/scu_analog.o
+ .data          0x2000054c        0x0 /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/driver/scu_pwr.o
+ .data          0x2000054c        0x0 /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/driver/posif.o
+ .data          0x2000054c        0x0 /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/driver/scu_int.o
+ .data          0x2000054c        0x0 /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/driver/math.o
+ .data          0x2000054c        0x0 /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/driver/pau.o
+ .data          0x2000054c        0x0 /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/driver/div.o
+ .data          0x2000054c        0x0 /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/driver/nvm.o
+ .data          0x2000054c        0x0 /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/driver/comparator.o
+ .data          0x2000054c        0x0 /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/driver/flash.o
+ .data          0x2000054c        0x0 /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/driver/prng.o
+ .data          0x2000054c        0x0 /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/app/main.o
+ .data          0x2000054c        0x0 /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/app/app_gpio.o
+ .data          0x2000054c        0x0 /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/app/system.o
+ .data          0x2000054c        0x0 /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/_startup/startup_xmc1300.o
+ *(.data*)
+ *(*.data)
+ *(.gnu.linkonce.d*)
+                0x2000054c                        . = ALIGN (0x4)
+                [!provide]                        PROVIDE (__preinit_array_start = .)
+ *(.preinit_array)
+                [!provide]                        PROVIDE (__preinit_array_end = .)
+                0x2000054c                        . = ALIGN (0x4)
+                [!provide]                        PROVIDE (__init_array_start = .)
+ *(SORT_BY_NAME(.init_array.*))
+ *(.init_array)
+                [!provide]                        PROVIDE (__init_array_end = .)
+                0x2000054c                        . = ALIGN (0x4)
+                [!provide]                        PROVIDE (__fini_array_start = .)
+ *(SORT_BY_NAME(.fini_array.*))
+ *(.fini_array)
+                [!provide]                        PROVIDE (__fini_array_end = .)
+                0x2000054c                        . = ALIGN (0x4)
+                0x2000054c                        __data_end = .
+                0x1000158c                        DataLoadAddr = LOADADDR (.data)
+                0x00000004                        __data_size = (__data_end - __data_start)
+
+.igot.plt       0x2000054c        0x0 load address 0x10001590
+ .igot.plt      0x2000054c        0x0 /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/driver/scu_clk.o
+
+.ram_code       0x2000054c        0x0 load address 0x10001590
+                0x2000054c                        . = ALIGN (0x4)
+                0x2000054c                        __ram_code_start = .
+ *(.ram_code)
+                0x2000054c                        . = ALIGN (0x4)
+                0x2000054c                        __ram_code_end = .
+                0x10001590                        __ram_code_load = LOADADDR (.ram_code)
+                0x00000000                        __ram_code_size = (__ram_code_end - __ram_code_start)
+                0x00000590                        __text_size = ((((__exidx_end - sText) + VeneerSize) + __data_size) + __ram_code_size)
+                0x10001590                        eText = (sText + __text_size)
+
+.bss            0x2000054c        0x4 load address 0x10001590
+                0x2000054c                        . = ALIGN (0x4)
+                0x2000054c                        __bss_start = .
+ *(.bss)
+ .bss           0x2000054c        0x0 /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/driver/wdt.o
+ .bss           0x2000054c        0x0 /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/driver/scu_gen.o
+ .bss           0x2000054c        0x0 /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/driver/rtc.o
+ .bss           0x2000054c        0x0 /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/driver/scu_clk.o
+ .bss           0x2000054c        0x0 /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/driver/scu_reset.o
+ .bss           0x2000054c        0x0 /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/driver/gpio.o
+ .bss           0x2000054c        0x0 /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/driver/scu_analog.o
+ .bss           0x2000054c        0x0 /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/driver/scu_pwr.o
+ .bss           0x2000054c        0x0 /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/driver/posif.o
+ .bss           0x2000054c        0x0 /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/driver/scu_int.o
+ .bss           0x2000054c        0x0 /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/driver/math.o
+ .bss           0x2000054c        0x0 /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/driver/pau.o
+ .bss           0x2000054c        0x0 /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/driver/div.o
+ .bss           0x2000054c        0x0 /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/driver/nvm.o
+ .bss           0x2000054c        0x0 /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/driver/comparator.o
+ .bss           0x2000054c        0x0 /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/driver/flash.o
+ .bss           0x2000054c        0x0 /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/driver/prng.o
+ .bss           0x2000054c        0x0 /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/app/main.o
+ .bss           0x2000054c        0x0 /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/app/app_gpio.o
+ .bss           0x2000054c        0x0 /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/app/system.o
+ .bss           0x2000054c        0x0 /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/_startup/startup_xmc1300.o
+ *(.bss*)
+ *(COMMON)
+ *(.gnu.linkonce.b*)
+                0x2000054c                        . = ALIGN (0x4)
+                0x2000054c                        __bss_end = .
+                0x20000550                        . = ALIGN (0x8)
+ *fill*         0x2000054c        0x4 
+                0x20000550                        Heap_Bank1_Start = .
+                0x00000000                        __bss_size = (__bss_end - __bss_start)
+
+.no_init        0x20003ffc        0x0
+                0x20003ffc                        Heap_Bank1_End = .
+ *(.no_init)
+                0x00003aac                        Heap_Bank1_Size = (Heap_Bank1_End - Heap_Bank1_Start)
+                0x00000001                        ASSERT ((Heap_Bank1_Start <= Heap_Bank1_End), region SRAM overflowed no_init section)
+
+/DISCARD/
+ *(.comment)
+
+.stab
+ *(.stab)
+
+.stabstr
+ *(.stabstr)
+
+.debug
+ *(.debug)
+
+.line
+ *(.line)
+
+.debug_srcinfo
+ *(.debug_srcinfo)
+
+.debug_sfnames
+ *(.debug_sfnames)
+
+.debug_aranges  0x00000000      0x120
+ *(.debug_aranges)
+ .debug_aranges
+                0x00000000       0x20 /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/driver/scu_gen.o
+ .debug_aranges
+                0x00000020       0x20 /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/driver/scu_clk.o
+ .debug_aranges
+                0x00000040       0x20 /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/driver/gpio.o
+ .debug_aranges
+                0x00000060       0x20 /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/driver/div.o
+ .debug_aranges
+                0x00000080       0x20 /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/driver/nvm.o
+ .debug_aranges
+                0x000000a0       0x20 /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/app/main.o
+ .debug_aranges
+                0x000000c0       0x20 /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/app/app_gpio.o
+ .debug_aranges
+                0x000000e0       0x20 /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/app/system.o
+ .debug_aranges
+                0x00000100       0x20 /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/_startup/startup_xmc1300.o
+
+.debug_pubnames
+ *(.debug_pubnames)
+
+.debug_pubtypes
+ *(.debug_pubtypes)
+
+.debug_info     0x00000000      0x31c
+ *(.debug_info .gnu.linkonce.wi.*)
+ .debug_info    0x00000000       0x24 /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/driver/scu_gen.o
+ .debug_info    0x00000024       0x24 /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/driver/scu_clk.o
+ .debug_info    0x00000048       0x24 /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/driver/gpio.o
+ .debug_info    0x0000006c       0x25 /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/driver/div.o
+ .debug_info    0x00000091       0x24 /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/driver/nvm.o
+ .debug_info    0x000000b5       0x31 /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/app/main.o
+ .debug_info    0x000000e6       0x24 /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/app/app_gpio.o
+ .debug_info    0x0000010a       0x24 /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/app/system.o
+ .debug_info    0x0000012e      0x1ee /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/_startup/startup_xmc1300.o
+
+.debug_abbrev   0x00000000       0xdc
+ *(.debug_abbrev)
+ .debug_abbrev  0x00000000       0x14 /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/driver/scu_gen.o
+ .debug_abbrev  0x00000014       0x14 /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/driver/scu_clk.o
+ .debug_abbrev  0x00000028       0x14 /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/driver/gpio.o
+ .debug_abbrev  0x0000003c       0x14 /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/driver/div.o
+ .debug_abbrev  0x00000050       0x14 /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/driver/nvm.o
+ .debug_abbrev  0x00000064       0x28 /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/app/main.o
+ .debug_abbrev  0x0000008c       0x14 /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/app/app_gpio.o
+ .debug_abbrev  0x000000a0       0x14 /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/app/system.o
+ .debug_abbrev  0x000000b4       0x28 /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/_startup/startup_xmc1300.o
+
+.debug_line     0x00000000      0x3db
+ *(.debug_line)
+ .debug_line    0x00000000       0x56 /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/driver/scu_gen.o
+ .debug_line    0x00000056       0x75 /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/driver/scu_clk.o
+ .debug_line    0x000000cb       0x7b /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/driver/gpio.o
+ .debug_line    0x00000146       0x8c /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/driver/div.o
+ .debug_line    0x000001d2       0x59 /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/driver/nvm.o
+ .debug_line    0x0000022b       0x68 /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/app/main.o
+ .debug_line    0x00000293       0x49 /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/app/app_gpio.o
+ .debug_line    0x000002dc       0x4c /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/app/system.o
+ .debug_line    0x00000328       0xb3 /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/_startup/startup_xmc1300.o
+
+.debug_frame
+ *(.debug_frame)
+
+.debug_str      0x00000000      0x571
+ *(.debug_str)
+ .debug_str     0x00000000      0x571 /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/driver/scu_gen.o
+                                 0x95 (size before relaxing)
+ .debug_str     0x00000571        0x0 /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/driver/scu_clk.o
+                                 0x95 (size before relaxing)
+ .debug_str     0x00000571        0x0 /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/driver/gpio.o
+                                 0x92 (size before relaxing)
+ .debug_str     0x00000571        0x0 /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/driver/div.o
+                                 0x91 (size before relaxing)
+ .debug_str     0x00000571        0x0 /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/driver/nvm.o
+                                 0x91 (size before relaxing)
+ .debug_str     0x00000571        0x0 /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/app/main.o
+                                 0x94 (size before relaxing)
+ .debug_str     0x00000571        0x0 /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/app/app_gpio.o
+                                 0x93 (size before relaxing)
+ .debug_str     0x00000571        0x0 /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/app/system.o
+                                 0x91 (size before relaxing)
+ .debug_str     0x00000571        0x0 /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/_startup/startup_xmc1300.o
+                                0x32b (size before relaxing)
+
+.debug_loc
+ *(.debug_loc)
+
+.debug_macinfo
+ *(.debug_macinfo)
+
+.debug_ranges
+ *(.debug_ranges)
+
+.debug_weaknames
+ *(.debug_weaknames)
+
+.debug_funcnames
+ *(.debug_funcnames)
+
+.debug_typenames
+ *(.debug_typenames)
+
+.debug_varnames
+ *(.debug_varnames)
+
+.build_attributes
+                0x00000000      0x279
+ *(.ARM.attributes)
+ .ARM.attributes
+                0x00000000       0x1c /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/driver/wdt.o
+ .ARM.attributes
+                0x0000001c       0x21 /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/driver/scu_gen.o
+ .ARM.attributes
+                0x0000003d       0x1c /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/driver/rtc.o
+ .ARM.attributes
+                0x00000059       0x21 /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/driver/scu_clk.o
+ .ARM.attributes
+                0x0000007a       0x1c /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/driver/scu_reset.o
+ .ARM.attributes
+                0x00000096       0x21 /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/driver/gpio.o
+ .ARM.attributes
+                0x000000b7       0x1c /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/driver/scu_analog.o
+ .ARM.attributes
+                0x000000d3       0x1c /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/driver/scu_pwr.o
+ .ARM.attributes
+                0x000000ef       0x1c /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/driver/posif.o
+ .ARM.attributes
+                0x0000010b       0x1c /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/driver/scu_int.o
+ .ARM.attributes
+                0x00000127       0x1c /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/driver/math.o
+ .ARM.attributes
+                0x00000143       0x1c /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/driver/pau.o
+ .ARM.attributes
+                0x0000015f       0x21 /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/driver/div.o
+ .ARM.attributes
+                0x00000180       0x21 /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/driver/nvm.o
+ .ARM.attributes
+                0x000001a1       0x1c /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/driver/comparator.o
+ .ARM.attributes
+                0x000001bd       0x1c /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/driver/flash.o
+ .ARM.attributes
+                0x000001d9       0x1c /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/driver/prng.o
+ .ARM.attributes
+                0x000001f5       0x21 /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/app/main.o
+ .ARM.attributes
+                0x00000216       0x21 /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/app/app_gpio.o
+ .ARM.attributes
+                0x00000237       0x21 /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/app/system.o
+ .ARM.attributes
+                0x00000258       0x21 /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/_startup/startup_xmc1300.o
+LOAD /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/driver/wdt.o
+LOAD /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/driver/scu_gen.o
+LOAD /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/driver/rtc.o
+LOAD /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/driver/scu_clk.o
+LOAD /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/driver/scu_reset.o
+LOAD /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/driver/gpio.o
+LOAD /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/driver/scu_analog.o
+LOAD /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/driver/scu_pwr.o
+LOAD /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/driver/posif.o
+LOAD /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/driver/scu_int.o
+LOAD /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/driver/math.o
+LOAD /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/driver/pau.o
+LOAD /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/driver/div.o
+LOAD /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/driver/nvm.o
+LOAD /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/driver/comparator.o
+LOAD /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/driver/flash.o
+LOAD /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/driver/prng.o
+LOAD /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/app/main.o
+LOAD /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/app/app_gpio.o
+LOAD /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/app/system.o
+LOAD /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/_startup/startup_xmc1300.o
+OUTPUT(/home/tinchu/work/embedded/infineon/xmc1000/assembly/bin/ig01.elf elf32-littlearm)
+LOAD linker stubs
+
+.debug_line_str
+                0x00000000      0x14b
+ .debug_line_str
+                0x00000000      0x14b /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/driver/scu_gen.o
+                                 0x87 (size before relaxing)
+ .debug_line_str
+                0x0000014b        0x0 /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/driver/scu_clk.o
+                                 0x87 (size before relaxing)
+ .debug_line_str
+                0x0000014b        0x0 /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/driver/gpio.o
+                                 0x84 (size before relaxing)
+ .debug_line_str
+                0x0000014b        0x0 /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/driver/div.o
+                                 0x83 (size before relaxing)
+ .debug_line_str
+                0x0000014b        0x0 /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/driver/nvm.o
+                                 0x83 (size before relaxing)
+ .debug_line_str
+                0x0000014b        0x0 /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/app/main.o
+                                 0x81 (size before relaxing)
+ .debug_line_str
+                0x0000014b        0x0 /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/app/app_gpio.o
+                                 0x85 (size before relaxing)
+ .debug_line_str
+                0x0000014b        0x0 /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/app/system.o
+                                 0x83 (size before relaxing)
+ .debug_line_str
+                0x0000014b        0x0 /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/_startup/startup_xmc1300.o
+                                 0x91 (size before relaxing)
