@@ -13,7 +13,7 @@ Linker script and memory map
                 0x00000400                        stack_size = DEFINED (stack_size)?stack_size:0x400
                 0x00000004                        no_init_size = 0x4
 
-.text           0x10001000      0x454
+.text           0x10001000      0x420
                 0x10001000                        sText = .
  *(.reset)
  .reset         0x10001000       0x92 /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/_startup/startup_xmc1300.o
@@ -101,25 +101,25 @@ Linker script and memory map
  *(.dtors)
  *(.rodata .rodata.*)
  *fill*         0x10001292        0x2 
- .rodata        0x10001294      0x1c0 /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/driver/gpio.o
+ .rodata        0x10001294      0x18c /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/driver/gpio.o
  *(.gnu.linkonce.r*)
  *(vtable)
-                0x10001454                        . = ALIGN (0x4)
+                0x10001420                        . = ALIGN (0x4)
 
-.glue_7         0x10001454        0x0
- .glue_7        0x10001454        0x0 linker stubs
+.glue_7         0x10001420        0x0
+ .glue_7        0x10001420        0x0 linker stubs
 
-.glue_7t        0x10001454        0x0
- .glue_7t       0x10001454        0x0 linker stubs
+.glue_7t        0x10001420        0x0
+ .glue_7t       0x10001420        0x0 linker stubs
 
-.vfp11_veneer   0x10001454        0x0
- .vfp11_veneer  0x10001454        0x0 linker stubs
+.vfp11_veneer   0x10001420        0x0
+ .vfp11_veneer  0x10001420        0x0 linker stubs
 
-.v4_bx          0x10001454        0x0
- .v4_bx         0x10001454        0x0 linker stubs
+.v4_bx          0x10001420        0x0
+ .v4_bx         0x10001420        0x0 linker stubs
 
-.iplt           0x10001454        0x0
- .iplt          0x10001454        0x0 /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/driver/scu_clk.o
+.iplt           0x10001420        0x0
+ .iplt          0x10001420        0x0 /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/driver/scu_clk.o
 
 .eh_frame_hdr
  *(.eh_frame_hdr)
@@ -129,15 +129,15 @@ Linker script and memory map
 
 .ARM.extab
  *(.ARM.extab* .gnu.linkonce.armextab.*)
-                0x10001454                        . = ALIGN (0x4)
-                0x10001454                        __exidx_start = .
+                0x10001420                        . = ALIGN (0x4)
+                0x10001420                        __exidx_start = .
 
 .ARM.exidx
  *(.ARM.exidx* .gnu.linkonce.armexidx.*)
-                0x10001454                        __exidx_end = .
-                0x10001454                        . = ALIGN (0x4)
+                0x10001420                        __exidx_end = .
+                0x10001420                        . = ALIGN (0x4)
 
-.VENEER_Code    0x2000000c      0x138 load address 0x10001454
+.VENEER_Code    0x2000000c      0x138 load address 0x10001420
                 0x2000000c                        . = ALIGN (0x4)
                 0x2000000c                        VeneerStart = .
  *(.XmcVeneerCode)
@@ -178,10 +178,10 @@ Linker script and memory map
                 0x200000bc                BCCU0_0_Veneer
                 0x20000144                        . = ALIGN (0x4)
                 0x20000144                        VeneerEnd = .
-                0x10001454                        eROData = LOADADDR (.VENEER_Code)
+                0x10001420                        eROData = LOADADDR (.VENEER_Code)
                 0x00000138                        VeneerSize = (ABSOLUTE (VeneerEnd) - ABSOLUTE (VeneerStart))
 
-.rel.dyn        0x20000144        0x0 load address 0x1000158c
+.rel.dyn        0x20000144        0x0 load address 0x10001558
  .rel.iplt      0x20000144        0x0 /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/driver/scu_clk.o
 
 Stack           0x20000144      0x404 load address 0x00000000
@@ -191,7 +191,7 @@ Stack           0x20000144      0x404 load address 0x00000000
  *fill*         0x20000148      0x400 
                 0x20000548                        __initial_sp = .
 
-.data           0x20000548        0x4 load address 0x1000158c
+.data           0x20000548        0x4 load address 0x10001558
                 0x20000548                        . = ALIGN (0x4)
                 0x20000548                        __data_start = .
  *(.data)
@@ -236,24 +236,24 @@ Stack           0x20000144      0x404 load address 0x00000000
                 [!provide]                        PROVIDE (__fini_array_end = .)
                 0x2000054c                        . = ALIGN (0x4)
                 0x2000054c                        __data_end = .
-                0x1000158c                        DataLoadAddr = LOADADDR (.data)
+                0x10001558                        DataLoadAddr = LOADADDR (.data)
                 0x00000004                        __data_size = (__data_end - __data_start)
 
-.igot.plt       0x2000054c        0x0 load address 0x10001590
+.igot.plt       0x2000054c        0x0 load address 0x1000155c
  .igot.plt      0x2000054c        0x0 /home/tinchu/work/embedded/infineon/xmc1000/assembly/obj/driver/scu_clk.o
 
-.ram_code       0x2000054c        0x0 load address 0x10001590
+.ram_code       0x2000054c        0x0 load address 0x1000155c
                 0x2000054c                        . = ALIGN (0x4)
                 0x2000054c                        __ram_code_start = .
  *(.ram_code)
                 0x2000054c                        . = ALIGN (0x4)
                 0x2000054c                        __ram_code_end = .
-                0x10001590                        __ram_code_load = LOADADDR (.ram_code)
+                0x1000155c                        __ram_code_load = LOADADDR (.ram_code)
                 0x00000000                        __ram_code_size = (__ram_code_end - __ram_code_start)
-                0x00000590                        __text_size = ((((__exidx_end - sText) + VeneerSize) + __data_size) + __ram_code_size)
-                0x10001590                        eText = (sText + __text_size)
+                0x0000055c                        __text_size = ((((__exidx_end - sText) + VeneerSize) + __data_size) + __ram_code_size)
+                0x1000155c                        eText = (sText + __text_size)
 
-.bss            0x2000054c        0x4 load address 0x10001590
+.bss            0x2000054c        0x4 load address 0x1000155c
                 0x2000054c                        . = ALIGN (0x4)
                 0x2000054c                        __bss_start = .
  *(.bss)

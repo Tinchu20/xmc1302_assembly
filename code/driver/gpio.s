@@ -758,57 +758,6 @@
             .section        .rodata
             .align          2
 gpio_port_pin_LUT:
-            .word 11
-            .word 12
-            .word 13
-            .word 14
-            .word 15
-            .word 16
-            .word 17
-            .word 18
-            .word 19
-            .word 20
-            .word 21
-            .word 22
-            .word 23
-            .word 24
-            .word 25
-            .word 26
-
-            .word 27
-            .word 28
-            .word 29
-            .word 30
-            .word 31
-            .word 32
-            .word 33
-            .word 34
-            .word 35
-            .word 36
-            .word 37
-            .word 38
-            .word 39
-            .word 40
-            .word 41
-            .word 42
-
-            .word 43
-            .word 44
-            .word 45
-            .word 46
-            .word 47
-            .word 48
-            .word 49
-            .word 50
-            .word 51
-            .word 52
-            .word 53
-            .word 54
-            .word 55
-            .word 56
-            .word 57
-            .word 58
-/*
             .word GPIO_PORT_PIN_0
             .word GPIO_PORT_PIN_1
             .word GPIO_PORT_PIN_2
@@ -859,7 +808,6 @@ gpio_port_pin_LUT:
             .word GPIO_DATA_NOT_AVAILABLE
             .word GPIO_DATA_NOT_AVAILABLE
             .word GPIO_DATA_NOT_AVAILABLE
-*/
 gpio_port_pin_LUT_end:
 gpio_port_pin_LUT_size:
             .word (gpio_port_pin_LUT_end - gpio_port_pin_LUT)           /* size in bytes  → 12 */
@@ -958,24 +906,6 @@ gpio_port_reg_phcr_LUT_size:
             .word (gpio_port_reg_phcr_LUT_end - gpio_port_reg_phcr_LUT)           /* size in bytes  → 12 */
 gpio_port_reg_phcr_LUT_count:
             .word (gpio_port_reg_phcr_LUT_end - gpio_port_reg_phcr_LUT) >> 2       /* number of entries → 3 */
-
-temp_LUT:
-    .word   15
-temp_LUT_1:
-    .word   20
-    .word   25
-    .word   30
-    .word   35
-
-    .word   120
-    .word   125
-    .word   130
-    .word   135
-
-    .word   220
-    .word   225
-    .word   230
-    .word   235
 
 /**
  **********************************************************************************************************************
