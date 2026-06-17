@@ -21,34 +21,11 @@ main:
             ldr         r1, =57
             bl          udiv
 
-            movs        r0, #GPIO_PORT_0
-            movs        r1, #GPIO_PORT_PIN_5
-            movs        r2, #GPIO_PIN_PCX_OUT_PP_GP
-            bl          gpio_init
+            bl          app_gpio_init
 
-
-            movs        r0, #GPIO_PORT_1
-            movs        r1, #GPIO_PORT_PIN_11
-            movs        r2, #GPIO_PIN_PCX_OUT_PP_GP
-            bl          gpio_init
-
-            movs        r0, #GPIO_PORT_2
-            movs        r1, #GPIO_PORT_PIN_14
-            movs        r2, #GPIO_PIN_PCX_OUT_PP_GP
-            bl          gpio_init
-
-
-            movs        r0, #GPIO_PORT_1
-            movs        r1, #GPIO_PORT_PIN_9
-            movs        r2, #GPIO_PIN_PCX_OUT_PP_GP
-            bl          gpio_init
-
-
-            bl          led
-
-            bl          led_blinking
 
             bx          lr
+
             .size       main, .-main
 
             .include        "reg_gpio.inc"

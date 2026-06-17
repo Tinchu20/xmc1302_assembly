@@ -744,6 +744,9 @@
 
 .equ        PORT_PUSH_PULL,                  0x00000010
 .equ        IOCR_SHIFT,                      0x03
+.equ        REG_OMR_SET_MASK,                0x01
+.equ        REG_OMR_RESET_MASK,              0x10000
+.equ        REG_OMR_TOGGLE_MASK,             REG_OMR_SET_MASK | REG_OMR_RESET_MASK
 
 .equ        GPIO_DATA_NOT_AVAILABLE,         -1
 .equ        GPIO_LUT_SIZE_BYTES,             (gpio_port_pin_LUT_end - gpio_port_pin_LUT)
@@ -846,7 +849,6 @@ gpio_port_reg_iocr_LUT:
             .word REG_ADDR_PORT0_IOCR8
             .word REG_ADDR_PORT0_IOCR12
 
-
             .word REG_ADDR_PORT1_IOCR0
             .word REG_ADDR_PORT1_IOCR4
             .word GPIO_DATA_NOT_AVAILABLE
@@ -861,6 +863,10 @@ gpio_port_reg_iocr_LUT_size:
             .word (gpio_port_reg_iocr_LUT_end - gpio_port_reg_iocr_LUT)           /* size in bytes  → 12 */
 gpio_port_reg_iocr_LUT_count:
             .word (gpio_port_reg_iocr_LUT_end - gpio_port_reg_iocr_LUT) >> 2       /* number of entries → 3 */
+gpio_port_reg_iocr_LUT_cols:
+            .word 4
+gpio_port_reg_iocr_LUT_rows:
+            .word (((gpio_port_reg_iocr_LUT_end - gpio_port_reg_iocr_LUT) >> 2) >> 2)       /* number of entries → 3 */
 
 gpio_port_reg_pdisc_LUT:
             .word REG_ADDR_PORT0_PDISC
@@ -911,12 +917,12 @@ gpio_port_reg_phcr_LUT_count:
  **********************************************************************************************************************
  * @brief       : Unsigned Division
  *
- * @param[in]   : r0 - Dividend,
- *              : r1 : Divisor
+ * @param[in]   : r0 - Dividend
+ *              : r1 - Divisor
  *
  * @param[out]  :
  *
- * @retval      : r0 - Quotient,
+ * @retval      : r0 - Quotient
  *              : r1 - Remainder
  **********************************************************************************************************************
  */
@@ -933,17 +939,132 @@ gpio_port_reg_phcr_LUT_count:
             .type           gpio_init, %function
 
 gpio_init:
-            push            {lr}
-            ldr             r3, =gpio_port_pin_LUT
-            movs            r4, r3
-            ldr             r5, =gpio_port_pin_LUT_cols
-            ldr             r5, [r5]
-            muls            r5, r0
-            adds            r5, r1
-            lsls            r5, r5, #2
-            adds            r4, r5
-            ldr             r6, [r4]
-            pop             {pc}
+            push            {r4, r5, r6, lr}                /* 4 words = 8-aligned, save callee + lr    */
+
+                                                            /* preserve args that must survive the call */
+            movs            r4, r0                          /* r4 = port  (kept)                        */
+            movs            r5, r1                          /* r5 = pin   (kept)                        */
+            movs            r6, r3                          /* r6 = level (kept for later OMR)          */
+
+            ldr             r0, =gpio_port_pin_LUT_cols
+            ldr             r0, [r0]
+            muls            r0, r4
+            adds            r0, r1
+            lsls            r0, r0, #2
+            ldr             r1, =gpio_port_pin_LUT
+            ldr             r0, [r1, r0]
+            adds            r0, #1
+            beq             gpio_init_errorL
+
+            movs            r0, r4
+            movs            r1, r5
+            bl              gpio_init_iocr
+            adds            r0, #1
+            beq             gpio_init_errorL
+            movs            r0, r4
+            movs            r1, r5
+            movs            r3, r6
+            bl              gpio_init_omr
+            adds            r0, #1
+            beq             gpio_init_errorL
+            pop             {r4, r5, r6, pc}
+gpio_init_errorL:
+            movs            r0, #1
+            negs            r0, r0
+gpio_init_retL:
+            pop             {r4, r5, r6, pc}
+
+gpio_init_iocr:
+            push            {r4, r5}
+            ldr             r3, =gpio_port_reg_iocr_LUT_cols
+            ldr             r3, [r3]
+            lsrs            r1, r1, #2
+            muls            r0, r3
+            adds            r0, r0, r1
+            lsls            r0, r0, #2
+            ldr             r1, =gpio_port_reg_iocr_LUT
+            ldr             r0, [r1, r0]
+            adds            r3, r0, #1
+            beq             gpio_init_iocr_errorL
+            ldr             r3, [r0]                                /* Read data from IOCRx register           */
+            movs            r1, r5                                  /* Move pin from r5 to r1                  */
+            movs            r4, #0x03                               /* Move 0x03 to r4                         */
+            ands            r1, r4                                  /* Bitwise and r1 & r4 and save data to r1 */
+            lsls            r1, r1, r4
+            movs            r4, #0xF8
+            lsls            r4, r4, r1
+            mvns            r4, r4
+            ands            r3, r4
+            movs            r4, #0x03
+            lsls            r2, r2, r4
+            lsls            r2, r2, r1
+            orrs            r2, r3
+            ldr             r3, [r0]
+            str             r2, [r0]
+            ldr             r3, [r0]
+            pop             {r4, r5}
+            bx              lr
+gpio_init_iocr_errorL:
+            movs            r0, #1
+            negs            r0, r0
+            pop             {r4, r5}
+            bx              lr
+
+gpio_init_omr:
+            push            {r4, r5}
+            ldr             r4, =gpio_port_reg_omr_LUT
+            lsls            r0, r0, #2
+            ldr             r4, [r4, r0]
+            cmp             r3, #GPIO_PORT_PIN_OUTPUT_LEVEL_SET
+            beq             gpio_init_omr_setL
+            cmp             r3, #GPIO_PORT_PIN_OUTPUT_LEVEL_RESET
+            beq             gpio_init_omr_resetL
+            cmp             r3, #GPIO_PORT_PIN_OUTPUT_LEVEL_TOGGLE
+            beq             gpio_init_omr_toggleL
+            pop             {r4, r5}
+            bx              lr
+gpio_init_omr_setL:
+            movs            r5, #REG_OMR_SET_MASK
+            lsls            r5, r5, r1
+            str             r5, [r4]
+            pop             {r4, r5}
+            bx              lr
+gpio_init_omr_resetL:
+            ldr             r5, =#REG_OMR_RESET_MASK
+            lsls            r5, r5, r1
+            str             r5, [r4]
+            pop             {r4, r5}
+            bx              lr
+gpio_init_omr_toggleL:
+            ldr             r5, =#REG_OMR_TOGGLE_MASK
+            lsls            r5, r5, r1
+            str             r5, [r4]
+            pop             {r4, r5}
+            bx              lr
+gpio_init_omr_errorL:
+            movs            r0, #1
+            negs            r0, r0
+            pop             {r4, r5}
+            bx              lr
+
+gpio_set:
+            push            {r4, r5}
+            ldr             r4, =gpio_port_reg_omr_LUT
+            lsls            r0, r0, #2
+            ldr             r4, [r4, r0]
+            b               gpio_init_omr_setL
+gpio_reset:
+            push            {r4, r5}
+            ldr             r4, =gpio_port_reg_omr_LUT
+            lsls            r0, r0, #2
+            ldr             r4, [r4, r0]
+            b               gpio_init_omr_resetL
+gpio_toggle:
+            push            {r4, r5}
+            ldr             r4, =gpio_port_reg_omr_LUT
+            lsls            r0, r0, #2
+            ldr             r4, [r4, r0]
+            b               gpio_init_omr_toggleL
 
 led_blinking:
             ldr             r4, =REG_ADDR_PORT0_IOCR0

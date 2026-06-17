@@ -47,8 +47,12 @@
  **********************************************************************************************************************
  */
 
-.equ GPIO_PORT_PIN_OUTPUT_LEVEL_RESET,  0x10000
-.equ GPIO_PORT_PIN_OUTPUT_LEVEL_SET,    0x01
+//.equ GPIO_PORT_PIN_OUTPUT_LEVEL_RESET,  0x10000
+//.equ GPIO_PORT_PIN_OUTPUT_LEVEL_SET,    0x01
+
+.equ GPIO_PORT_PIN_OUTPUT_LEVEL_SET,        0
+.equ GPIO_PORT_PIN_OUTPUT_LEVEL_RESET,      1
+.equ GPIO_PORT_PIN_OUTPUT_LEVEL_TOGGLE,     2
 
 /**
  **********************************************************************************************************************
